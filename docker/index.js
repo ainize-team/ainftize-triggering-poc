@@ -50,6 +50,7 @@ app.post('/trigger', async (req, res) => {
 
     const inputPath = tx.tx_body.operation.ref;
     const parsedInputPath = parsePath(inputPath);
+    console.log(`tx: ${JSON.stringify(tx,null,2)}`);
     if (parsedInputPath.length !== 7 ||
         parsedInputPath[0] !== 'apps' ||
         parsedInputPath[1] !== 'sf_ainft_0' ||
