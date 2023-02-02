@@ -5,7 +5,6 @@ const envfile = require("envfile");
 const envPath = ".env";
 
 const ainCreateAccount = async () => {
-  // AIN account create
   const accounts = ain.wallet.create(1);
   const myAddress = accounts[0];
   ain.wallet.setDefaultAccount(myAddress);
