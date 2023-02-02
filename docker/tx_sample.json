@@ -1,0 +1,36 @@
+{
+    "function": {
+        "function_id": "gpt2-pride-and-prejudice",
+        "function_type": "REST",
+        "function_url": "<https://main-ainize-trigger-tutorial-scy6500.endpoint.ainize.ai/trigger>"
+    },
+    "transaction": {
+        "address": "Oxbb5ecD24E8Bf0937d8c22D4440Fa95D50a1d108E",
+        "extra": {
+            "created_at": 1640223741870,
+            "executed_at": 1640223741870
+        },
+        "hash": "Oxeeb009260026a0fb030aa4218104ec2acecbed8c8cf4dba31650c1509cc2b0a1",
+        "signature": "Oxeeb009260026a0fb030aa4218104ec2acecbed8c8cf4dba31650c1509cc2b0a1a1dfa59513aac069f4a389e925cc885ae7b3ae7f8e1e2483603c555eb34288152c7b2b4ab774553cfe5f2761d16507fe500ea862ad0b34e52b436f5a91afa5cbib",
+        "tx_body": {
+            "nonce": -1,
+            "operation": {
+                "is_global": false,
+                "ref": "/apps/sf_ainft/sd_inpainting/0x817aA7eA11592225FA90aC1902fEb34300A4A24C/0/1640223741870/input",
+                "type": "SET_VALUE",
+                "value": "{
+                    \"task_id\": \"359f6368-df09-5d72-a69d-15ba1c67f6f3\",
+                    \"prompt\": \"an ocean view\",
+                    \"parts\": \"background\",
+                    \"seed\": 42,
+                    \"guidance_scale\": 7.5,
+                    \"origin\": \"https://naver.com\",
+                    \"result\": \"https://naver.com\",
+                    \"updated_at\": 1640223741870,
+                    \"public_key\": \"12341234\"
+                }"
+            },
+            "timestamp": 1640223741430
+        }
+    }
+}
