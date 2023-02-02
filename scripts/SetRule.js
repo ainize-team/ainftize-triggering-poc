@@ -23,22 +23,22 @@ const ainSetRule = async (appPath, targetAddress) => {
     );
   }
 
-  const resRestrict = await ain.db
-    .ref(`${appPath}/$model/$uid/$tokenId/$timestamp/signed_data`)
-    .setRule({
-      value: {
-        ".rule": {
-          write: `${targetAddress} === '$address'`,
-        },
-      },
-      nonce: -1,
-    });
+  // const resRestrict = await ain.db
+  //   .ref(`${appPath}/$model/$uid/$tokenId/$timestamp/signed_data`)
+  //   .setRule({
+  //     value: {
+  //       ".rule": {
+  //         write: `${targetAddress} === '$address'`,
+  //       },
+  //     },
+  //     nonce: -1,
+  //   });
 
-  if (resRestrict) {
-    console.log(
-      `[${appPath}/$model/$uid/$tokenId/$timestamp/signed_data] only can be writed by ${targetAddress}.\nCheck TX in testnet-insight.ainetwork.ai: ${resRestrict.tx_hash}`
-    );
-  }
+  // if (resRestrict) {
+  //   console.log(
+  //     `[${appPath}/$model/$uid/$tokenId/$timestamp/signed_data] only can be writed by ${targetAddress}.\nCheck TX in testnet-insight.ainetwork.ai: ${resRestrict.tx_hash}`
+  //   );
+  // }
 };
 
 module.exports = { ainSetRule: ainSetRule };

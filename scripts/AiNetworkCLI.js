@@ -87,10 +87,10 @@ const setFunctionQuestion = [
         }
         appPath = `/apps/${appName}`;
 
-        const addressResponse = await prompts(addressQuestion);
-        const targetAddress = addressResponse.address;
-
-        await ainSetRule(appPath, targetAddress);
+        // const addressResponse = await prompts(addressQuestion);
+        // const targetAddress = addressResponse.address;
+        // await ainSetRule(appPath, targetAddress);
+        await ainSetRule(appPath, "");
         break;
 
       case "4":
