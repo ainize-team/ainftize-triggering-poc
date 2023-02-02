@@ -2,7 +2,7 @@
     "function": {
         "function_id": "gpt2-pride-and-prejudice",
         "function_type": "REST",
-        "function_url": "<https://main-ainize-trigger-tutorial-scy6500.endpoint.ainize.ai/trigger>"
+        "function_url": "<https://master-ainftize-triggering-poc-ainize-team.endpoint.ainize.ai/trigger>"
     },
     "transaction": {
         "address": "Oxbb5ecD24E8Bf0937d8c22D4440Fa95D50a1d108E",

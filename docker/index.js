@@ -93,6 +93,7 @@ app.post('/trigger', async (req, res) => {
     .catch((e) => {
       console.error(`setValue failure:`, e);
     });
+    console.log(JSON.stringify(result,null,2));
   
 });
 
