@@ -76,7 +76,7 @@ app.post('/trigger', async (req, res) => {
     // }
     
     const SDResult = await axios.get(`${SD_INPAINTING_ENDPOINT}/tasks/${task_id}`, pickedOptions);
-    console.log(JSON.stringify(SDResult.data,null,2));
+    // console.log(JSON.stringify(SDResult.data,null,2));
 
     if (SDResult.data.status !== "completed") {
         console.log(`Task ${task_id} is not completed!`);
@@ -87,9 +87,11 @@ app.post('/trigger', async (req, res) => {
 
     //pre-check the output path
     const outputPath = formatPath([...parsedInputPath.slice(0, parsedInputPath.length - 1), "signed_data"]);
+    console.log(outputPath);
     const result = await ain.db.ref(outputPath).setValue({
       value: `${JSON.stringify(SDResult.data, null, 2)}`,
       nonce: -1,
+      gas_price: 500
     })
     .catch((e) => {
       console.error(`setValue failure:`, e);
