@@ -64,7 +64,7 @@ app.post('/trigger', async (req, res) => {
     const options = JSON.parse(inputValue);
 
     const task_id = options.task_id;
-    const pickedOptions = (({ prompt, seed, guidance_scale }) => ({ prompt, seed, guidance_scale }))(options);
+    let pickedOptions = (({ prompt, seed, guidance_scale }) => ({ prompt, seed, guidance_scale }))(options);
     pickedOptions = {...pickedOptions, ...{"num_images_per_prompt": 1}};
     
     // pickedOptions = {

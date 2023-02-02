@@ -16,7 +16,7 @@
             "nonce": -1,
             "operation": {
                 "is_global": false,
-                "ref": "/apps/sf_ainft/sd_inpainting/0x817aA7eA11592225FA90aC1902fEb34300A4A24C/0/1640223741870/input",
+                "ref": "/apps/sf_ainft_0/sd_inpainting/0x817aA7eA11592225FA90aC1902fEb34300A4A24C/0/1640223741870/input",
                 "type": "SET_VALUE",
                 "value": "{
                     \"task_id\": \"359f6368-df09-5d72-a69d-15ba1c67f6f3\",
