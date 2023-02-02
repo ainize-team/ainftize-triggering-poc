@@ -19,16 +19,16 @@
                 "ref": "/apps/sf_ainft/sd_inpainting/0x817aA7eA11592225FA90aC1902fEb34300A4A24C/0/1640223741870/input",
                 "type": "SET_VALUE",
                 "value": "{
-                    'task_id': '359f6368-df09-5d72-a69d-15ba1c67f6f3',
-                    'prompt': 'an ocean view',
-                    'parts': 'background',
-                    'seed': 42,
-                    'guidance_scale': 0.75,
-                    'origin': 'https://naver.com',
-                    'result': 'https://naver.com',
-                    'updated_at': 1640223741870,
-                    'public_key': '12341234'
-                    }"
+                    \"task_id\": \"359f6368-df09-5d72-a69d-15ba1c67f6f3\",
+                    \"prompt\": \"an ocean view\",
+                    \"parts\": \"background\",
+                    \"seed\": 42,
+                    \"guidance_scale\": 7.5,
+                    \"origin\": \"https://naver.com\",
+                    \"result\": \"https://naver.com\",
+                    \"updated_at\": 1640223741870,
+                    \"public_key\": \"12341234\"
+                }"
             },
             "timestamp": 1640223741430
         }

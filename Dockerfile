@@ -6,4 +6,4 @@ RUN yarn install
 
 EXPOSE 80
 
-CMD ["node", "index.js"]
+CMD ["node", "docker/index.js"]
