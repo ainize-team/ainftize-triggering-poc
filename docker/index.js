@@ -10,7 +10,7 @@ const { default: Ain } = require('@ainblockchain/ain-js');
 const app = express();
 
 const port = 80;
-const blockchainEndpoint = process.env.PROVIDER_URL;
+const blockchainEndpoint = process.env.TESTNET_PROVIDER_URL;
 const chainId = process.env.NETWORK === 'mainnet' ? 1 : 0;
 const ain = new AinJs(blockchainEndpoint, chainId);
 const BOT_NAME = process.env.BOT_NAME;
