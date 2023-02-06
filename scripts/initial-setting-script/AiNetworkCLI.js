@@ -60,6 +60,8 @@ const setFunctionQuestion = [
   },
 ];
 
+const sleep = delay => new Promise(resolve => setTimeout(resolve, delay));
+
 (async () => {
   while (true) {
     console.log(`Select Command\n${commandList.join("\n")}`);
@@ -122,6 +124,6 @@ const setFunctionQuestion = [
         process.exit(1);
     }
     console.log("------------------------------------------");
-    setTimeout(() => console.log("wait for 10 seconds"), 10000);
+    await sleep(10000);
   }
 })();
