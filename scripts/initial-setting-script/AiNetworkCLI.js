@@ -122,5 +122,6 @@ const setFunctionQuestion = [
         process.exit(1);
     }
     console.log("------------------------------------------");
+    setTimeout(() => console.log("wait for 10 seconds"), 10000);
   }
 })();

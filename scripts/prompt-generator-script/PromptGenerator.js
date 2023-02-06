@@ -2,7 +2,7 @@ const fs = require('fs');
 const axios = require('axios');
 const prompt = require('prompt-sync')();
 
-const topics = ['gen-modifier', 'artist', 'site', 'details', 'hd'];
+const topics = ['style', 'gen-modifier', 'artist', 'site', 'details', 'hd'];
 
 async function generatePrompt(subject) {
   if (!fs.existsSync('./inpainting-prompt-data.json')) {

@@ -50,3 +50,6 @@ Thumbs.db
 *.mov
 *.wmv
 
+
+# Inpainting Data
+inpainting-prompt-data.json
