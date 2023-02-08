@@ -71,11 +71,10 @@ app.post('/trigger', async (req, res) => {
 
     const hashedValue = CryptoJS.SHA512(inputValue).toString(CryptoJS.enc.Hex);
     if(cache.get(hashedValue)) {
+        cache.ttl( hashedValue, 60 )
         return;
     }
     cache.set(hashedValue, true, 60);
-
-    console.log(`set ${hashedValue} as ${cache.get(hashedValue)}`);
 
     const task_id = options.task_id;
     let pickedOptions = (({ prompt, seed, guidance_scale }) => ({ prompt, seed, guidance_scale }))(options);
@@ -110,7 +109,6 @@ app.post('/trigger', async (req, res) => {
       console.error(`setValue failure:`, e);
     });
     console.log(JSON.stringify(result,null,2));
-  
 });
 
 app.listen(port, () => {
