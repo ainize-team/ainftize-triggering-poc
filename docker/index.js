@@ -4,6 +4,9 @@ const axios = require('axios');
 const dotenv = require('dotenv');
 dotenv.config();
 
+const NodeCache = require( "node-cache" );
+const CryptoJS = require("crypto-js")
+
 const { parsePath, formatPath } = require('./util');
 const { default: Ain } = require('@ainblockchain/ain-js');
 
@@ -20,6 +23,8 @@ const BOT_ADDRESS = AinJs.utils.toChecksumAddress(ain.wallet.add(BOT_PRIVKEY));
 ain.wallet.setDefaultAccount(BOT_ADDRESS);
 
 const SD_INPAINTING_ENDPOINT = "https://comcom-pp-diffusers-inpaint-dev.ucanuse.xyz";
+
+const cache = new NodeCache();
 
 app.use(express.json());
 
@@ -63,6 +68,14 @@ app.post('/trigger', async (req, res) => {
     // 2. call GET /tasks/{task_id}
     const inputValue = tx.tx_body.operation.value;
     const options = JSON.parse(inputValue);
+
+    const hashedValue = CryptoJS.SHA512(inputValue).toString(CryptoJS.enc.Hex);
+    if(cache.get(hashedValue)) {
+        return;
+    }
+    cache.set(hashedValue, true, 60);
+
+    console.log(`set ${hashedValue} as ${cache.get(hashedValue)}`);
 
     const task_id = options.task_id;
     let pickedOptions = (({ prompt, seed, guidance_scale }) => ({ prompt, seed, guidance_scale }))(options);
