@@ -32,7 +32,7 @@ function buildPrompt(subject, promptData) {
         break;
     }
   }
-  const promptString = `${Math.random() > 0.5 ? promptDict['gen-modifier'] : promptDict['style']} of ${subject}, by ${promptDict['artist']}, ${promptDict['site']}, ${promptDict['details'].join(', ')}, ${promptDict['hd']}`;
+  const promptString = `${promptDict['style']} of ${subject}, by ${promptDict['artist']}, ${promptDict['site']}, ${promptDict['gen-modifier']}, ${promptDict['details'].join(', ')}, ${promptDict['hd']}`;
   console.log(`YOUR PROMPT: ${promptString}`);
 }
 
