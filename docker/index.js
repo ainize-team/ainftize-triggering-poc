@@ -74,7 +74,6 @@ app.post('/trigger', async (req, res) => {
         cache.ttl( hashedValue, 60 )
         return;
     }
-    cache.set(hashedValue, true, 60);
 
     const task_id = options.task_id;
     let pickedOptions = (({ prompt, seed, guidance_scale }) => ({ prompt, seed, guidance_scale }))(options);
@@ -96,7 +95,6 @@ app.post('/trigger', async (req, res) => {
         return;
     }
     
-
     //pre-check the output path
     const outputPath = formatPath([...parsedInputPath.slice(0, parsedInputPath.length - 1), "signed_data"]);
     console.log(outputPath);
@@ -109,6 +107,9 @@ app.post('/trigger', async (req, res) => {
       console.error(`setValue failure:`, e);
     });
     console.log(JSON.stringify(result,null,2));
+    if (result.code == 0) {
+        cache.set(hashedValue, true, 60);
+    }
 });
 
 app.listen(port, () => {
