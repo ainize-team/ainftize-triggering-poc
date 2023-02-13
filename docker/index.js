@@ -22,7 +22,7 @@ const BOT_ADDRESS = AinJs.utils.toChecksumAddress(ain.wallet.add(BOT_PRIVKEY));
 // set BOT_ADDRESS as default wallet
 ain.wallet.setDefaultAccount(BOT_ADDRESS);
 
-const SD_INPAINTING_ENDPOINT = "https://comcom-pp-diffusers-inpaint-dev.ucanuse.xyz";
+const SD_INPAINTING_ENDPOINT = process.env.SD_INPAINTING_ENDPOINT;
 
 const cache = new NodeCache();
 
@@ -55,11 +55,10 @@ app.post('/trigger', async (req, res) => {
 
     const inputPath = tx.tx_body.operation.ref;
     const parsedInputPath = parsePath(inputPath);
-    console.log(`tx: ${JSON.stringify(tx,null,2)}`);
+
     if (parsedInputPath.length !== 7 ||
         parsedInputPath[0] !== 'apps' ||
-        parsedInputPath[1] !== 'sf_ainft_0' ||
-        parsedInputPath[2] !== 'sd_inpainting' ||
+        parsedInputPath[1] !== `${process.env.APP_NAME}` ||
         parsedInputPath[6] !== 'input') {
         console.log(`Not supported path pattern: ${inputPath}`);
         return;
@@ -76,18 +75,8 @@ app.post('/trigger', async (req, res) => {
     }
 
     const task_id = options.task_id;
-    let pickedOptions = (({ prompt, seed, guidance_scale }) => ({ prompt, seed, guidance_scale }))(options);
-    pickedOptions = {...pickedOptions, ...{"num_images_per_prompt": 1}};
     
-    // pickedOptions = {
-    //     prompt: ...,
-    //     seed: ...,
-    //     guidance_scale: ...,
-    //     num_images_per_prompt: 1
-    // }
-    
-    const SDResult = await axios.get(`${SD_INPAINTING_ENDPOINT}/tasks/${task_id}`, pickedOptions);
-    // console.log(JSON.stringify(SDResult.data,null,2));
+    const SDResult = await axios.get(`${SD_INPAINTING_ENDPOINT}/tasks/${task_id}`);
 
     if (SDResult.data.status !== "completed") {
         console.log(`Task ${task_id} is not completed!`);
@@ -97,9 +86,17 @@ app.post('/trigger', async (req, res) => {
     
     //pre-check the output path
     const outputPath = formatPath([...parsedInputPath.slice(0, parsedInputPath.length - 1), "signed_data"]);
-    console.log(outputPath);
+
+    const signedData = ain.wallet.sign(JSON.stringify(SDResult.data.result));
+
+    const writeData = {
+        "status": `${SDResult.data.status}`,
+        "updated_at": `${SDResult.data.updated_at}`,
+        "result": `${signedData}`
+    };
+
     const result = await ain.db.ref(outputPath).setValue({
-      value: `${JSON.stringify(SDResult.data, null, 2)}`,
+      value: `${JSON.stringify(writeData)}`,
       nonce: -1,
       gas_price: 500
     })
