@@ -96,8 +96,8 @@ app.post('/trigger', async (req, res) => {
         "updated_at": `${SDResult.data.updated_at}`,
         "result": `${signedData}`
     };
-    console.log(writeData);
-    const result = await ain.db.ref(outputPath).setValue({
+
+    const setValueRes = await ain.db.ref(outputPath).setValue({
       value: `${JSON.stringify(writeData)}`,
       nonce: -1,
       gas_price: 500
@@ -105,9 +105,9 @@ app.post('/trigger', async (req, res) => {
     .catch((e) => {
       console.error(`setValue failure:`, e);
     });
-    console.log(JSON.stringify(result));
-    if (result.code != 0) {
-        cache.del(hashedValue);
+
+    if(setValueRes.result.code != 0) {
+      cache.del(hashedValue);
     }
 });
 
