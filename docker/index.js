@@ -73,6 +73,7 @@ app.post('/trigger', async (req, res) => {
         cache.ttl( hashedValue, 60 )
         return;
     }
+    cache.set(hashedValue, true, 60);
 
     const task_id = options.task_id;
     
@@ -81,6 +82,7 @@ app.post('/trigger', async (req, res) => {
     if (SDResult.data.status !== "completed") {
         console.log(`Task ${task_id} is not completed!`);
         res.send(`Task ${task_id} is not completed!`);
+        cache.del(hashedValue);
         return;
     }
     
@@ -94,7 +96,7 @@ app.post('/trigger', async (req, res) => {
         "updated_at": `${SDResult.data.updated_at}`,
         "result": `${signedData}`
     };
-
+    console.log(writeData);
     const result = await ain.db.ref(outputPath).setValue({
       value: `${JSON.stringify(writeData)}`,
       nonce: -1,
@@ -103,9 +105,9 @@ app.post('/trigger', async (req, res) => {
     .catch((e) => {
       console.error(`setValue failure:`, e);
     });
-    console.log(JSON.stringify(result,null,2));
-    if (result.code == 0) {
-        cache.set(hashedValue, true, 60);
+    console.log(JSON.stringify(result));
+    if (result.code != 0) {
+        cache.del(hashedValue);
     }
 });
 
